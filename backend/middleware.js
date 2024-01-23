@@ -2,14 +2,15 @@ const jwt = require('jsonwebtoken')
 
 
 const authMiddleware = (req,res,next)=>{
-    const authHeader = req.headers.Authorization
+    const authHeader = req.headers.authorization
 
     if(!authHeader || !authHeader.startsWith('Bearer')){
         return res.json({
-            success:false
+            success:false,
+            message:"Please Log In/ Sign up"
         }).status(400)
     }
-    const token = authHeader.split('')[1]
+    const token = authHeader.split(' ')[1]
     try {
         const decode = jwt.verify(token,'secretToken')
         req.userID = decode.id        //contains user id

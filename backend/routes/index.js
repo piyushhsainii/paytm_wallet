@@ -4,6 +4,7 @@ const userModel = require('../db')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 const bycyrpt = require('bcrypt')
+const accountModel = require('../accountModel')
 
 
 const userSchema = zod.object({
@@ -40,6 +41,12 @@ router.post('/signup', async(req,res)=>{
         }).status(400)
     }
     const Newuser = await userModel.create(body)
+
+    const account = await accountModel.create({
+        userID:Newuser._id,
+        balance:Math.floor(1 + Math.random() * 1000)
+    })
+
     const token = jwt.sign({id:Newuser._id},"secretToken")
     return res.json({
         success:true,
@@ -69,7 +76,8 @@ router.post('/signin',async(req,res)=>{
     const token = jwt.sign({id:userExist._id},"secretToken")
     return res.json({
         succesS:true,
-        message:"Succcessfully signedi In"
+        message:"Succcessfully signedi In",
+        token
     }).status(200)
     })
 
@@ -114,6 +122,30 @@ router.put('/updateInfo',async(req,res)=>{
         error:error
     })
    }
+})
+
+//api to get users based on query
+router.post('/bulk',async(req,res)=>{
+    const  filter = req.query.filter ?? ""
+    const users = await userModel.find({
+        $or:[
+            {
+            firstName:{$regex:filter,$options:'i'}
+            },{
+            lastName:{$regex:filter,$options:'i'}
+            }
+        ]
+        })
+    if(!users){
+    return res.json({
+            status:true,
+            message:"No Users Found"
+        }).status(200)
+    }
+    return res.json({
+        success:true,
+        users
+    }).status(200)
 })
 
 
