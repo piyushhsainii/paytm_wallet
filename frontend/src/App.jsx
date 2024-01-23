@@ -4,6 +4,7 @@ import AuthPage from './authPage'
 function App() {
   return (
     <Router>
+      <div>lol</div>
       <Routes>
         <Route path='/' element={<AuthPage/>}  ></Route>
       </Routes>
