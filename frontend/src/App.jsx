@@ -1,13 +1,20 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AuthPage from './authPage'
+import Login from './Login'
+import Dashboard from './Dashboard'
+import TransferMoney from './TransferMoney'
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <Router>
-      <div>lol</div>
       <Routes>
         <Route path='/' element={<AuthPage/>}  ></Route>
+        <Route path='/login' element={<Login />}  ></Route>
+        <Route path='/Dashboard' element={<Dashboard />}  ></Route>
+        <Route path='/transferFunds/:id' element={<TransferMoney />}  ></Route>
       </Routes>
+      <Toaster/>
   </Router>
   ) 
 }

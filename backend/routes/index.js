@@ -5,6 +5,7 @@ const router = express.Router()
 const jwt = require('jsonwebtoken')
 const bycyrpt = require('bcrypt')
 const accountModel = require('../accountModel')
+const authMiddleware = require('../middleware')
 
 
 const userSchema = zod.object({
@@ -126,7 +127,7 @@ router.put('/updateInfo',async(req,res)=>{
 
 //api to get users based on query
 router.post('/bulk',async(req,res)=>{
-    const  filter = req.query.filter ?? ""
+    const  { filter } = req.body ?? ""
     const users = await userModel.find({
         $or:[
             {
@@ -148,5 +149,35 @@ router.post('/bulk',async(req,res)=>{
     }).status(200)
 })
 
+router.get('/fetchDetails',authMiddleware, async(req,res)=>{
+    const user = await userModel.findById(req.userID)
+    if(!user){
+        return res.json({
+            success:false,
+            message:"Could not find user details"
+        }).status(400)
+    }
+    return res.json({
+        success:true,
+        user
+    }).status(200)
+
+})
+router.post('/fetchAnyUser',authMiddleware, async(req,res)=>{
+
+
+    const user = await userModel.findById(req.body.userID)
+    if(!user){
+        return res.json({
+            success:false,
+            message:"Could not find user details"
+        }).status(400)
+    }
+    return res.json({
+        success:true,
+        user
+    }).status(200)
+
+})
 
 module.exports = router

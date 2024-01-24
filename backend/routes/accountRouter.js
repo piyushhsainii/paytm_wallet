@@ -41,7 +41,6 @@ if(!success){
     }).status(400)
 }
 const myuserID = req.userID
-console.log(myuserID)
 // fetching user details
 const user = await accountModel.findOne({userID:myuserID}).session(session)
 if(!user){
@@ -60,7 +59,6 @@ if(user.balance < amount){
 }
 
 // account details in which funds will be transferred
-
 const toAccount  = await accountModel.findOne({userID:to}).session(session)
 if(!toAccount){
     session.abortTransaction();
@@ -79,7 +77,7 @@ await session.commitTransaction();
 res.json({
     success:true,
     message:"Transfer successfull"
-})
+}).status(200)
 
 })
 
