@@ -10,9 +10,9 @@ const authMiddleware = require('../middleware')
 
 const userSchema = zod.object({
     username:zod.string().email(),
-    password:zod.string().min(4),
-    firstName:zod.string().min(4),
-    lastName:zod.string().min(4)
+    password:zod.string().min(2),
+    firstName:zod.string().min(2),
+    lastName:zod.string().min(2)
 })
 
 
@@ -84,11 +84,11 @@ router.post('/signin',async(req,res)=>{
 
 //update user info
 
-router.put('/updateInfo',async(req,res)=>{
+router.put('/updateInfo',authMiddleware,async(req,res)=>{
     const { username, password , firstName, lastName  } = req.body
 
     const user = await userModel.findOne({username})
-
+ 
     if(!user){
        return res.json({
             success:false,

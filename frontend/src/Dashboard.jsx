@@ -47,7 +47,6 @@ const Dashboard = () => {
       toast("Something went wrong");
     }
   };
- console.log(filter)
  const fetchUsers = async()=>{
     const { data: bulkData } = await axios.post(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/bulk`, {
       filter:filter
@@ -68,7 +67,6 @@ const filteredUser = bulkUsers&& bulkUsers.filter(user=> user._id !==Details._id
     fetchUserDetails()
   },[userLogin,axios])
   useEffect(() => {
-    console.log('Filter changed:', filter);
     fetchUsers()
   }, [filter]);
   return (
@@ -78,7 +76,7 @@ const filteredUser = bulkUsers&& bulkUsers.filter(user=> user._id !==Details._id
           <hr></hr>
           <div className='flex gap-4 mr-3 mt-3' >
             <div className='font-semibold' >Hello,{Details.firstName}</div>
-            <div className='' > <img src="/letter-u.png" className='w-[25px] border-slate-700 border-[0.1px] rounded-[50%] p-1' alt="" /> </div>
+            <div className=''  > <img src="/letter-u.png" className='w-[25px] border-slate-700 hover:cursor-pointer border-[0.1px] rounded-[50%] p-1' onClick={()=> navigate('/updateUserDetails')} alt="" /> </div>
           </div>
         </div>
       <div className='flex gap-3 mt-3 ml-3 font-bold' >

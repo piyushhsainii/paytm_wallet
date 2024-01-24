@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const TransferMoney = () => {
   const location = useLocation();
+  const navigate = useNavigate()
   const pathname = location.pathname;
   const updated = pathname.split('/')[2]
   const [accountDetails, setAccountDetails] = useState('')
@@ -45,6 +46,7 @@ const TransferMoney = () => {
           });
           if(transferFunds.success){
             toast(transferFunds.message)
+            navigate('/Dashboard')
           } else {
             toast("Something went wrong")
           }
@@ -68,12 +70,12 @@ const TransferMoney = () => {
         <div className='font-bold text-2xl mt-3' >Send Money</div>
         <div>
           <div className='flex min-w-[25vw] gap-3  '>
-            <div > 
+            <div >  
+            </div> 
             <img src="/letter-u.png" className='w-[25px] border-slate-700 border-[0.1px] rounded-[50%] p-1' alt="" />
             </div>
             <div className='font-bold text-xl ' >
-              {TOaccountDetails.firstName}
-            </div>
+              {TOaccountDetails.firstName} 
             </div>
             <div className='flex flex-col  gap-1 mt-3 ' >
                 <label className='font-semibold text-sm ' htmlFor="">Amount (in ₹)</label>
