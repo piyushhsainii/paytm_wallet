@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "https://paytm-wallet.onrender.com/:path*",
-        "destination": "https://paytm-wallet.vercel.app//:path*"
+        "destination": "https://paytm-wallet.vercel.app/:path*"
       }
     ]
   }
