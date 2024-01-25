@@ -1,7 +1,7 @@
 {
     "rewrites": [
       {
-        "source": "/https://netflix-clone-iaj6.onrender.com/:path*",
+        "source": "https://paytm-wallet.onrender.com/:path*",
         "destination": "https://paytm-wallet.vercel.app//:path*"
       }
     ]
