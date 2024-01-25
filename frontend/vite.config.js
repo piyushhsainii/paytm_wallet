@@ -7,6 +7,7 @@ export default defineConfig({
   ,
   define: {
     'process.env': {API :process.env.VITE_URL},
+    VITE_URL:JSON.stringify(env.VITE_URL)
   },
   resolve: {
     alias: {
