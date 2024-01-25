@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/https://netflix-clone-iaj6.onrender.com/:path*",
+        "destination": "https://paytm-wallet.vercel.app//:path*"
+      }
+    ]
+  }
