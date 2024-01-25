@@ -1,8 +1,8 @@
 {
-    "rewrites": [
-      {
-        "source": "https://paytm-wallet.onrender.com/:path*",
-        "destination": "https://paytm-wallet.vercel.app/:path*"
-      }
-    ]
-  }
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "https://paytm-wallet.vercel.app/:path*"
+    }
+  ]
+}
