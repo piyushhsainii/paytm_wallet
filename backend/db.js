@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0.b2pt2yd.mongodb.net/payTM').then(()=>{
+mongoose.connect(process.env.MONGO_URI).then(()=>{
     console.log('Db connected')
 })
 
